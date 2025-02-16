@@ -11,9 +11,7 @@ import Badge from "../../components/shared/Badge";
 import Button from "../../components/shared/Button";
 import InputField from "../../components/shared/InputField";
 import Select from "../../components/shared/Select";
-import AddIcon from "../../../public/assets/AddIcon";
 import SerachIcon from "../../../public/assets/SearchIcon";
-import { useRouter } from "next/navigation";
 import MainNav from "@/components/navbar";
 
 function generateBadge(

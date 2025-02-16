@@ -56,7 +56,6 @@ export default function MainNav() {
       }
 
       console.log(pathname);
-      
 
       if (pathname.includes("/patients/") && pathname.includes("view")) {
         setNextDeliveryInfo(
@@ -149,13 +148,18 @@ export default function MainNav() {
               </button>
             </div>}
 
-          {pathname === "patients" &&
-            <Button
-              prefixIcon={AddIcon}
-              onClick={() => router.push(`/patients/add-patient`)}
-            >
-              Add patient
-            </Button>}
+          {pathname === "/patients" &&
+            <div className="flex justify-between">
+              <p>Patients</p>
+              <div>
+                <Button
+                  prefixIcon={AddIcon}
+                  onClick={() => router.push(`/patients/add-patient`)}
+                >
+                  Add patient
+                </Button>
+              </div>
+            </div>}
         </div>
       </div>
     </div>
