@@ -13,6 +13,7 @@ import InputField from "../../components/shared/InputField";
 import Select from "../../components/shared/Select";
 import SerachIcon from "../../../public/assets/SearchIcon";
 import MainNav from "@/components/navbar";
+import { useRouter } from "next/navigation";
 
 function generateBadge(
   status: Status
@@ -124,7 +125,11 @@ const columns = [
       return (
         <div className="flex justify-between">
           <Badge variant={badgeVariant} text={badgeText} className="!w-fit" />
-          <Button variant="outlined" className="!w-fit">
+          <Button
+            // onClick={() => router.push("/patients/view-patient")}
+            variant="outlined"
+            className="!w-fit"
+          >
             View
           </Button>
         </div>

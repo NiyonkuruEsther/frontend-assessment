@@ -3,9 +3,7 @@ import Badge from "../../../components/shared/Badge";
 import Button from "../../../components/shared/Button";
 import InputField from "../../../components/shared/InputField";
 import EditIcon from "../../../../public/assets/EditIcon";
-import Link from "next/link";
 import MainLayout from "@/components/layouts/MainLayout";
-
 
 export default function ViewPatient() {
   return (
