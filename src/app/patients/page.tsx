@@ -14,7 +14,6 @@ import SerachIcon from "../../../public/assets/SearchIcon";
 import MainNav from "@/components/navbar";
 import { usePatient } from "@/contexts/PatientContext";
 
-// Make sure this matches your PatientInfo interface from the context
 interface PatientInfo {
   hospitalId: string;
   patientName: string;

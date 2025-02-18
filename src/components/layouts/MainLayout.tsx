@@ -40,7 +40,6 @@ export default function MainLayout({
   children: React.ReactNode;
   patientData?: PatientInfoProps;
 }) {
-  // const router = useRouter();
   const pathname = usePathname();
   return (
     <main className="h-screen w-full overflow-scroll">

@@ -1,4 +1,3 @@
-// components/MainNav.tsx
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -45,10 +44,8 @@ export default function MainNav() {
       const paths = pathname.split("/").filter(Boolean);
 
       if (paths.length >= 1) {
-        // Start with the first path segment
         let formattedUrl = paths[0].charAt(0).toUpperCase() + paths[0].slice(1);
 
-        // Add each subsequent path segment with proper formatting
         for (let i = 1; i < paths.length; i++) {
           const formattedSegment = paths[i]
             .split("-")

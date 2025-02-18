@@ -102,9 +102,8 @@ export function ScanPackage({ patientName }: ScanPackageProps) {
     <ScanPackage4 key="component4" />
   ];
 
-  const displayTime = 1000; // 3 seconds
+  const displayTime = 1000;
 
-  // Where to redirect after the last component
   const redirectPath = "/patients";
 
   useEffect(

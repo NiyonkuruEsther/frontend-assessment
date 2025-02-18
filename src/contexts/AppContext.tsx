@@ -1,6 +1,4 @@
 "use client"
-
-// contexts/AppContext.tsx
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Patient, Rider } from '@/types';
 import { defaultPatients } from "@/data/patients";
@@ -27,17 +25,13 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-    // Initialize state
     const [isInitialized, setIsInitialized] = useState(false);
     const [patients, setPatients] = useState<Patient[]>([]);
     const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
     const [riders, setRiders] = useState<Rider[]>([]);
     const [selectedRider, setSelectedRider] = useState<Rider | null>(null);
   
-   
-  
-    // Patient Functions
-    const initializePatients = () => {
+      const initializePatients = () => {
         const storedPatients = localStorage.getItem('patients');
         if (!storedPatients) {
           const initialPatients = [{ ...defaultPatients, id: '1' }];

@@ -1,4 +1,3 @@
-// components/Stepper.tsx
 import { FaCircleCheck } from "react-icons/fa6";
 import { Step } from '../types';
 

@@ -108,7 +108,6 @@ export const riders: Rider[] = [
     type: "assigned_riders"
   },
 
-  // Assigned Riders
   {
     id: "16",
     name: "David Oyelowo",

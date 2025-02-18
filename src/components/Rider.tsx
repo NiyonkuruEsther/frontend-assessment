@@ -1,4 +1,3 @@
-// components/RiderList.tsx
 import { Rider } from '../types';
 
 interface RiderListProps {

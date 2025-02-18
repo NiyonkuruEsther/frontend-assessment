@@ -1,4 +1,3 @@
-// components/SetDrugCycle.tsx
 interface SetDrugCycleProps {
   patientName: string;
   initialDeliveryDate: Date;
@@ -12,7 +11,6 @@ const SetDrugCycle: React.FC<SetDrugCycleProps> = ({
   selectedCycle,
   onCycleSelect
 }) => {
-  // Calculate next delivery date (1 month from initial date)
   const nextDeliveryDate = new Date(initialDeliveryDate);
   nextDeliveryDate.setMonth(nextDeliveryDate.getMonth() + 1);
 

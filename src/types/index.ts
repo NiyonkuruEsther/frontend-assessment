@@ -1,6 +1,5 @@
 import { PatientInfoProps } from "@/components/PatientInfo";
 
-// types/index.ts
 export type Step = {
   id: number;
   title: string;
@@ -9,7 +8,6 @@ export type Step = {
   isClickable: boolean;
 };
 
-// types/index.ts
 export type RiderType =
   | "all"
   | "yaba_riders"
