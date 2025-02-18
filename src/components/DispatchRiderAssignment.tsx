@@ -5,6 +5,8 @@ import { Step, Rider, RiderType } from '../types';
 import RiderList from './Rider';
 import { riders } from '@/data/riders';
 import SetDrugCycle from './SetDrugCycleProps';
+import { ScanPackage } from './ScanPackage';
+import Button from './shared/Button';
 
 const initialSteps: Step[] = [
   { 
@@ -143,7 +145,7 @@ export default function Home() {
       )}
 
 {currentStep === 2 && (
-        <div className='border-t border-gray-200 pt-[20px] max-h-[50vh] overflow-hidden'>
+        <div className='border-t border-[#CFCFCF] pt-[20px] max-h-[50vh] overflow-hidden'>
           <div className="flex flex-wrap gap-4 mb-6">
             <button
               className={`px-4 py-2 rounded ${
@@ -188,7 +190,31 @@ export default function Home() {
         </div>
       )}
 
-      <div className="flex justify-end bg-white shadow-inner pt-6">
+{currentStep === 3 && (
+        <ScanPackage patientName="Oluwaseun Aregbesola" />
+      )}
+
+      {currentStep === 3 && 
+      <div className="flex justify-between bg-white shadow-inner pt-6">
+          <Button
+          variant='outlined' 
+            onClick={() => handleStepChange(currentStep - 1)}
+          >
+            Back
+          </Button>
+           
+          <Button 
+          variant='filled' 
+          disabled={true}
+          onClick={() => {/* Handle package assignment */}}
+          >
+            Assign Package
+          </Button>
+        
+        </div>}
+    
+
+     {currentStep !== 3 && <div className="flex justify-end bg-white shadow-inner pt-6">
         <button 
           className={`px-6 py-2 rounded transition-colors ${buttonState.className}`}
           disabled={buttonState.disabled}
@@ -196,7 +222,7 @@ export default function Home() {
         >
           Next
         </button>
-      </div>
+      </div>}
     </div>
   );
 }

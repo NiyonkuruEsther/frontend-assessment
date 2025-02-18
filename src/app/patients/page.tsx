@@ -64,14 +64,13 @@ const StatusArray = [
   Status.paid
 ];
 
-// Create mock data that matches PatientInfo interface
 const defaultData: PatientInfo[] = Array(50).fill(1).map((_, index) => ({
   hospitalId: "1AFHiiiiiH093",
   patientName: "Oluwaseun Aregbesola Omotoye",
   phoneNumber: "+2347068642920",
   nextDeliveryDate: "12th September 2020",
   location: "Vl, Lagos",
-  status: StatusArray[index % 5], // Convert enum to number
+  status: StatusArray[index % 5],
   email: "patient@example.com",
   firstName: "Oluwaseun",
   lastName: "Omotoye",
@@ -155,32 +154,36 @@ export default function One() {
   return (
     <div className="w-full mx-auto">
       <MainNav />
-      <hr className="my-5" />
+      <hr className="my-5 bg-[#CFCFCF]" />
 
-      <div className="w-custom-fit-screen flex py-5 items-center justify-between">
-        <div className="flex gap-5">
-          <span>Sort By</span>
-          <span className="font-bold">
+      <div className="flex pb-[42px] max-w-7xl mx-auto p-10 bg-white items-center justify-between">
+        <div className="flex gap-[13px] items-center">
+          <span className="text-sm text-opacity">Sort By</span>
+          <span className="font-semibold text-base">
             <Select
               options={["Hospital ID", "Patient's Name", "Phone Number"]}
             />
           </span>
         </div>
-        <div>
+        <div className="text-sm !font-thin">
           <InputField
             prefixIcon={SerachIcon}
             placeholder="Search by patient name, id"
+            className="font-thin"
           />
         </div>
       </div>
 
-      <div className="w-custom-fit-screen">
+      <div className=" max-w-7xl mx-auto bg-white p-10">
         <table className="w-full md:px-16 text-lg">
           <thead className="border-b">
             {table.getHeaderGroups().map(headerGroup =>
               <tr key={headerGroup.id} className="*:py-5">
                 {headerGroup.headers.map(header =>
-                  <th key={header.id} className="font-light text-left">
+                  <th
+                    key={header.id}
+                    className="text-sm text-start font-semibold text-opacity"
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -192,9 +195,12 @@ export default function One() {
               </tr>
             )}
           </thead>
-          <tbody className="font-light overflow-scroll">
+          <tbody className="overflow-scroll">
             {table.getRowModel().rows.map(row =>
-              <tr className="border-b *:py-5" key={row.id}>
+              <tr
+                className="border-b text-sm font-thin text-opacity  *:py-5"
+                key={row.id}
+              >
                 {row.getVisibleCells().map(cell =>
                   <td key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

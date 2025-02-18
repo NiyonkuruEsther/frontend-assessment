@@ -63,8 +63,6 @@ export default function MainNav() {
         setheadingUrl("");
       }
 
-      console.log(pathname);
-
       if (
         pathname.includes("/patients/") &&
         pathname.includes("view") &&
@@ -147,7 +145,7 @@ export default function MainNav() {
 
         <div className=" max-w-7xl px-4  mx-auto  flex items-center justify-between py-4">
           {headingUrl &&
-            <div className="text-sm text-gray-500">
+            <div className="text-2xl text-gray-500">
               {headingUrl}
             </div>}
           {nextDeliveryInfo &&
@@ -157,8 +155,11 @@ export default function MainNav() {
               </span>
               <div>
                 <Button
+                  size="lg"
                   onClick={() =>
-                    router.push(`/patients/view-patient/assign-package-to-patient`)}
+                    router.push(
+                      `/patients/view-patient/assign-package-to-patient`
+                    )}
                   variant="filled"
                 >
                   Assign Package to Patient
@@ -167,10 +168,11 @@ export default function MainNav() {
             </div>}
 
           {pathname === "/patients" &&
-            <div className="flex w-full items-center justify-between">
-              <p>Patients</p>
-              <div>
-                <Button prefixIcon={AddIcon}>Add patient</Button>
+            <div className="flex w-full justify-end">
+              <div className="self-end">
+                <Button size="lg" prefixIcon={AddIcon}>
+                  Add patient
+                </Button>
               </div>
             </div>}
         </div>

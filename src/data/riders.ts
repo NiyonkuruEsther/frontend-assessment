@@ -1,6 +1,6 @@
 import { Rider } from "@/types";
 
-export const riders: Rider[] = [
+export const defaultRiders: Rider[] = [
   {
     id: "1",
     name: "Emmanuel Adebayo",

@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply bg-tertiary-50;
-  @apply font-gilroy;
+  @apply bg-tertiary-50 font-gilroy;
+}
 
+.text-opacity {
+  @apply text-black text-opacity-80;
 }
 
 .w-custom-fit-screen {

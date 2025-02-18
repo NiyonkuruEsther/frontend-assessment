@@ -27,3 +27,19 @@ export type Rider = {
 export interface TableMeta {
   handleViewPatient: (patient: PatientInfoProps) => void;
 }
+
+export type Patient = {
+  id: number;
+  hospitalId: string;
+  patientName: string;
+  phoneNumber: string;
+  nextDeliveryDate: string;
+  location: string;
+  status: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  gender?: string;
+  deliveryAddress?: string;
+  assignedRider?: string | null;
+};
