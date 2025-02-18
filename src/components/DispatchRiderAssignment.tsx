@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import Stepper from '../components/Stepper';
-import { Step, Rider, RiderType } from '../types';
+import { Step, RiderType } from '../types';
 import RiderList from './Rider';
 import { riders } from '@/data/riders';
 import SetDrugCycle from './SetDrugCycleProps';

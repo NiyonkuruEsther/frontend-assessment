@@ -8,7 +8,7 @@ interface PopupProps {
   owner_name: string;
 }
 
-const Popup: React.FC<PopupProps> = ({ title, package_number, owner_name }) => {
+const Popup: React.FC<PopupProps> = ({ package_number, owner_name }) => {
   return (
     <div className="h-screen flex flex-col justify-center items-center w-screen bg-black bg-opacity-50">
       <div className="bg-white px-[53px] py-8 min-w-[456px] w-fit divide-y divide-[#CFCFCF] border border-red-200">

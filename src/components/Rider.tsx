@@ -34,7 +34,7 @@ const RiderList: React.FC<RiderListProps> = ({
           <div className="flex-1">
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <p className="text-sm text-gray-600">Dispatch Rider's Name</p>
+                <p className="text-sm text-gray-600">Dispatch Rider&apos;s Name</p>
                 <p className="font-medium">{rider.name}</p>
               </div>
               <div>
