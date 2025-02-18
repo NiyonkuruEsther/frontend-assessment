@@ -19,7 +19,7 @@ const RiderList: React.FC<RiderListProps> = ({
   );
 
   return (
-    <div className="space-y-4 max-h-[400px] overflow-y-auto">
+    <div className="space-y-4 max-h-[50vh] overflow-y-auto">
       {filteredRiders.map((rider) => (
         <div
           key={rider.id}

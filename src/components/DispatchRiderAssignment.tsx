@@ -126,7 +126,7 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="p-6 bg-white max-h-[70vh]">
       <Stepper
         currentStep={currentStep}
         steps={steps}
@@ -143,7 +143,7 @@ export default function Home() {
       )}
 
 {currentStep === 2 && (
-        <div className='border-t border-gray-200 pt-[44px]'>
+        <div className='border-t border-gray-200 pt-[20px] max-h-[50vh] overflow-hidden'>
           <div className="flex flex-wrap gap-4 mb-6">
             <button
               className={`px-4 py-2 rounded ${
@@ -188,7 +188,7 @@ export default function Home() {
         </div>
       )}
 
-      <div className="flex justify-end shadow-inner pt-6">
+      <div className="flex justify-end bg-white shadow-inner pt-6">
         <button 
           className={`px-6 py-2 rounded transition-colors ${buttonState.className}`}
           disabled={buttonState.disabled}

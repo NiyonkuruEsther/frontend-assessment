@@ -1,4 +1,5 @@
 import MainLayout from "@/components/layouts/MainLayout";
+import DispatchRiderAssignment from "@/components/DispatchRiderAssignment";
 import React from "react";
 
 const patientData = {
@@ -12,7 +13,9 @@ const patientData = {
 const page = () => {
   return (
     <MainLayout patientData={patientData}>
-      <div className="max-w-7xl mx-auto" />
+      <div className="max-w-7xl mx-auto">
+        <DispatchRiderAssignment />
+      </div>
     </MainLayout>
   );
 };
