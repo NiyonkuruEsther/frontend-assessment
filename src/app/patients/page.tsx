@@ -56,10 +56,32 @@ function generateBadge(
   }
 }
 
+const StatusArray = [
+  Status.completed,
+  Status.duePaid,
+  Status.dueUnpaid,
+  Status.assigned,
+  Status.paid
+];
+
+const defaultData: PatientInfo[] = Array(50).fill(1).map((_, index) => ({
+  hospitalId: "1AFHiiiiiH093",
+  patientName: "Oluwaseun Aregbesola Omotoye",
+  phoneNumber: "+2347068642920",
+  nextDeliveryDate: "12th September 2020",
+  location: "Vl, Lagos",
+  status: StatusArray[index % 5],
+  email: "patient@example.com",
+  firstName: "Oluwaseun",
+  lastName: "Omotoye",
+  gender: "Male",
+  deliveryAddress: "Vl, Lagos"
+}));
+
 const columnHelper = createColumnHelper<PatientInfo>();
 
 const ViewCell = ({ patient }: { patient: PatientInfo }) => {
-  const { handleViewPatien } = usePatient();
+  const { handleViewPatient } = usePatient();
   const [badgeVariant, badgeText] = generateBadge(patient.status as Status);
 
   return (
@@ -122,8 +144,7 @@ const columns = [
 ];
 
 export default function One() {
-  const { patients } = usePatient();
-  const [data] = useState(() => [...patients]);
+  const [data] = useState(() => [...defaultData]);
   const table = useReactTable({
     data,
     columns,

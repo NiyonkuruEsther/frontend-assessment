@@ -1,4 +1,3 @@
-import { Status } from "@/app/patients/page";
 import { Patient } from "@/types";
 
 export const defaultPatients: Patient[] = [
@@ -23,7 +22,7 @@ export const defaultPatients: Patient[] = [
     phoneNumber: "+2347068642920",
     nextDeliveryDate: "12th September 2020",
     location: "Vl, Lagos",
-    status: "completed",
+    status: "duePaid",
     email: "patient@example.com",
     firstName: "Oluwaseun",
     lastName: "Omotoye",
@@ -37,7 +36,7 @@ export const defaultPatients: Patient[] = [
     phoneNumber: "+2347068642920",
     nextDeliveryDate: "12th September 2020",
     location: "Vl, Lagos",
-    status: "completed",
+    status: "assigned",
     email: "patient@example.com",
     firstName: "Oluwaseun",
     lastName: "Omotoye",

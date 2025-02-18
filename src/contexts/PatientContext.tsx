@@ -9,6 +9,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { Patient, Rider } from "@/types";
+import { defaultPatients } from "@/data/patients";
 import { riders as defaultRiders } from '@/data/riders';
 
 interface PatientInfo {
@@ -51,6 +52,7 @@ export function PatientProvider({ children }: { children: ReactNode }) {
   const [riders, setRiders] = useState<Rider[]>([]);
   const [selectedRider, setSelectedRider] = useState<Rider | null>(null);
   const [patients, setPatients] = useState<Patient[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const [
     selectedPatient,
@@ -63,6 +65,16 @@ export function PatientProvider({ children }: { children: ReactNode }) {
     return null;
   });
 
+  const initializePatients = () => {
+    const storedPatients = localStorage.getItem('patients');
+    if (!storedPatients) {
+      const initialPatients = [{ ...defaultPatients, id: '1' }];
+      localStorage.setItem('patients', JSON.stringify(initialPatients));
+      setPatients(initialPatients);
+    } else {
+      setPatients(JSON.parse(storedPatients));
+    }
+}
   const createPatient = (newPatient: Omit<Patient, "id">) => {
     const updatedPatients = [
       ...patients,
@@ -166,6 +178,32 @@ export function PatientProvider({ children }: { children: ReactNode }) {
       setError(err as Error);
     }
   }, []);
+
+  const initializeSelectedData = () => {
+    const storedSelectedPatient = localStorage.getItem('selectedPatient');
+  if (storedSelectedPatient) {
+    setSelectedPatient(JSON.parse(storedSelectedPatient));
+  }
+
+  const storedSelectedRider = localStorage.getItem('selectedRider');
+  if (storedSelectedRider) {
+    setSelectedRider(JSON.parse(storedSelectedRider));
+  }
+
+}
+
+
+  useEffect(() => {
+    if (!isInitialized) {
+      initializePatients()
+
+        initializeRiders()
+        
+        initializeSelectedData()
+        
+      setIsInitialized(true);
+    }
+   }, [isInitialized]);
 
 
    const value = {
