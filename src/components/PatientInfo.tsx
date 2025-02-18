@@ -11,7 +11,6 @@ export interface PatientInfoProps {
 }
 
 const PatientInfo: React.FC<PatientInfoProps> = ({ patientData }) => {
-  // Define the keys you want to display
   const keys: (keyof PatientInfoProps["patientData"])[] = [
     "hospital_ID",
     "name",
@@ -24,13 +23,15 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ patientData }) => {
     return key
       .replace(/_/g, " ")
       .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter of each word
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
 
   return (
     <div className="font-gilroy py-8 w-fit px-8 h-fit bg-white">
-      <h1 className="font-medium pb-8 border-b text-[16px] border-[#CFCFCF]">Patient Information</h1>
+      <h1 className="font-medium pb-8 border-b text-[16px] border-[#CFCFCF]">
+        Patient Information
+      </h1>
       <div className="w-fit text-[14px] pt-8">
         {keys.map(key =>
           <div key={key} className="p-2 grid grid-cols-2 gap-10">

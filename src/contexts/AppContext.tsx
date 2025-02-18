@@ -9,7 +9,6 @@ import { riders as defaultRiders } from '@/data/riders';
 
 
 interface AppContextType {
-  // Patient State & Functions
   patients: Patient[];
   selectedPatient: Patient | null;
   setSelectedPatient: (patient: Patient | null) => void;
@@ -17,7 +16,6 @@ interface AppContextType {
   updatePatient: (patient: Patient) => void;
   clearSelectedPatient: () => void;
 
-  // Rider State & Functions
   riders: Rider[];
   selectedRider: Rider | null;
   setSelectedRider: (rider: Rider | null) => void;
@@ -78,7 +76,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('selectedPatient', JSON.stringify(null));
     };
   
-    // Rider Functions
     const initializeRiders = () => {
         const storedRiders = localStorage.getItem('riders');
       if (!storedRiders) {
@@ -131,16 +128,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       }
 
     }
-   // Initialize data on first load
    useEffect(() => {
     if (!isInitialized) {
-      // Initialize patients
       initializePatients()
 
-      // Initialize riders
         initializeRiders()
         
-      // Load selected items
         initializeSelectedData()
         
       setIsInitialized(true);
@@ -148,7 +141,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
    }, [isInitialized]);
     
     const value = {
-      // Patient State & Functions
       patients,
       selectedPatient,
       setSelectedPatient: handleSetSelectedPatient,
@@ -156,7 +148,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       updatePatient,
       clearSelectedPatient,
   
-      // Rider State & Functions
       riders,
       selectedRider,
       setSelectedRider: handleSetSelectedRider,
@@ -165,7 +156,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       clearSelectedRider,
     };
   
-    // Don't render until initialization is complete
     if (!isInitialized) {
       return null;
     }
