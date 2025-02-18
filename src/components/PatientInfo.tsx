@@ -29,7 +29,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ patientData }) => {
   };
 
   return (
-    <div className="font-gilroy py-8 w-fit px-8">
+    <div className="font-gilroy py-8 w-fit px-8 bg-white">
       <h1 className="font-medium pb-8 border-b text-[16px] border-gray-200">Patient Information</h1>
       <div className="w-fit text-[14px] pt-8">
         {keys.map(key =>

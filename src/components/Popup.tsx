@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Button from "./Button";
+import Button from "./shared/Button";
 
 interface PopupProps {
   title: string;
@@ -26,7 +26,10 @@ const Popup: React.FC<PopupProps> = ({ title, package_number, owner_name }) => {
           >
             No, Go Back
           </Button>
-          <Button variant="blue" onClick={() => alert("Blue Button Clicked!")}>
+          <Button
+            variant="filled"
+            onClick={() => alert("Blue Button Clicked!")}
+          >
             Yes, assign package
           </Button>
         </div>

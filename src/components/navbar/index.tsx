@@ -36,28 +36,40 @@ const navItems: NavItem[] = [
 
 export default function MainNav() {
   const pathname = usePathname();
-  const [breadcrumb, setBreadcrumb] = useState("");
+  const [headingUrl, setheadingUrl] = useState("");
   const [nextDeliveryInfo, setNextDeliveryInfo] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(
     () => {
       const paths = pathname.split("/").filter(Boolean);
-      if (paths.length > 1) {
-        setBreadcrumb(
-          `${paths[0].charAt(0).toUpperCase() +
-            paths[0].slice(1)} / ${paths[1]
+
+      if (paths.length >= 1) {
+        // Start with the first path segment
+        let formattedUrl = paths[0].charAt(0).toUpperCase() + paths[0].slice(1);
+
+        // Add each subsequent path segment with proper formatting
+        for (let i = 1; i < paths.length; i++) {
+          const formattedSegment = paths[i]
             .split("-")
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")}`
-        );
+            .join(" ");
+
+          formattedUrl += ` / ${formattedSegment}`;
+        }
+
+        setheadingUrl(formattedUrl);
       } else {
-        setBreadcrumb("");
+        setheadingUrl("");
       }
 
       console.log(pathname);
 
-      if (pathname.includes("/patients/") && pathname.includes("view")) {
+      if (
+        pathname.includes("/patients/") &&
+        pathname.includes("view") &&
+        !pathname.includes("assign")
+      ) {
         setNextDeliveryInfo(
           "Patient's next delivery date is 14th November 2020, in 2 days"
         );
@@ -134,9 +146,9 @@ export default function MainNav() {
         <hr className="w-screen" />
 
         <div className=" max-w-7xl px-4  mx-auto  flex items-center justify-between py-4">
-          {breadcrumb &&
+          {headingUrl &&
             <div className="text-sm text-gray-500">
-              {breadcrumb}
+              {headingUrl}
             </div>}
           {nextDeliveryInfo &&
             <div className="flex items-center justify-between">
@@ -145,7 +157,8 @@ export default function MainNav() {
               </span>
               <div>
                 <Button
-                  onClick={() => router.push(`/patients/assign-package`)}
+                  onClick={() =>
+                    router.push(`/patients/view-patient/assign-package-to-patient`)}
                   variant="filled"
                 >
                   Assign Package to Patient

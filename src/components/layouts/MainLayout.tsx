@@ -48,7 +48,7 @@ export default function MainLayout({
         <header className="bg-white">
           <MainNav />
         </header>
-        <div className="flex justify-between">
+        <div className="flex max-w-7xl mx-auto justify-between">
           {pathname.includes("assign-package")
             ? <PatientInfo patientData={patientData} />
             : <SideContentMainContentLayout
