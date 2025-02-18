@@ -3,8 +3,8 @@
 // contexts/AppContext.tsx
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Patient, Rider } from '@/types';
-import { defaultRiders } from '@/data/riders';
-import { defaultPatients } from '@/data/patients';
+import { defaultPatients } from "@/data/patients";
+import { riders as defaultRiders } from '@/data/riders';
 
 
 

@@ -4,7 +4,8 @@ import {
   useContext,
   ReactNode,
   useState,
-  useCallback
+  useCallback,
+  useEffect
 } from "react";
 import { useRouter } from "next/navigation";
 
@@ -88,18 +89,18 @@ export function PatientProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem("selectedPatient");
   }, []);
 
-  // This effect is redundant since we already initialize from localStorage
-  // in the useState initializer
-  // useEffect(() => {
-  //   try {
-  //     const storedPatient = localStorage.getItem("selectedPatient");
-  //     if (storedPatient) {
-  //       setSelectedPatient(JSON.parse(storedPatient));
-  //     }
-  //   } catch (err) {
-  //     setError(err as Error);
-  //   }
-  // }, []);
+  useEffect(() => {
+    console.log("helloooo");
+
+    try {
+      const storedPatient = localStorage.getItem("selectedPatient");
+      if (storedPatient) {
+        setSelectedPatient(JSON.parse(storedPatient));
+      }
+    } catch (err) {
+      setError(err as Error);
+    }
+  }, []);
 
   const value = {
     patientInfo,

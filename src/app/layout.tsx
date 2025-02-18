@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AppProvider } from "@/contexts/AppContext";
+import { PatientProvider } from "@/contexts/PatientContext";
 
 
 export const metadata: Metadata = {
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body
       >
-        <AppProvider>  {children}</AppProvider>
+        <AppProvider> 
+        <PatientProvider>  {children}</PatientProvider>
+        </AppProvider>
       
       </body>
     </html>

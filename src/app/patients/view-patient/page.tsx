@@ -24,7 +24,7 @@ export default function ViewPatient() {
 
 
   return (
-    <div className="w-custom-fit-screen">
+    <div className="">
       <MainLayout>
         <div className="w-[80%] pl-8">
           <div className="flex justify-between bg-white">
@@ -36,10 +36,10 @@ export default function ViewPatient() {
                     <Badge text="Paid" variant="success" />
                   </div>
                   <TabList className="text-right flex items-end justify-end gap-10 px-10">
-                    <Tab className="data-[selected]:text-primary data-[selected]:font-medium data-[selected]:border-b-4 p-4 data-[selected]:border-primary">
+                    <Tab className="data-[selected]:text-primary data-[selected]:font-medium data-[selected]:border-b-4 p-4 outline-none data-[selected]:border-primary">
                       Payment Information
                     </Tab>
-                    <Tab className="data-[selected]:text-primary data-[selected]:font-medium data-[selected]:border-b-4 p-4 data-[selected]:border-primary">
+                    <Tab className="data-[selected]:text-primary data-[selected]:font-medium data-[selected]:border-b-4 p-4 outline-none data-[selected]:border-primary">
                       Delivery Information
                     </Tab>
                   </TabList>
@@ -47,7 +47,7 @@ export default function ViewPatient() {
                 <TabPanels className="w-full px-5 border-b">
       <TabPanel className="mb-10">
         <div className="flex items-start gap-10 text-nowrap">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-5">
             <span className="font-bold">
               {"Patient's Information"}
             </span>
@@ -90,7 +90,7 @@ export default function ViewPatient() {
       </TabPanel>
       <TabPanel className="mb-10">
         <div className="flex items-start gap-10 text-nowrap">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-5">
             <span className="font-bold">
               {"Delivery Information"}
             </span>

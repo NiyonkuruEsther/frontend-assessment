@@ -37,7 +37,7 @@ const navItems: NavItem[] = [
 export default function MainNav() {
   const pathname = usePathname();
   const [headingUrl, setheadingUrl] = useState("");
-  const [nextDeliveryInfo, setNextDeliveryInfo] = useState<string | null>(null);
+  const [nextDeliveryInfo, setNextDeliveryInfo] = useState<React.ReactNode | null>(null);
   const router = useRouter();
 
   useEffect(
@@ -69,7 +69,11 @@ export default function MainNav() {
         !pathname.includes("assign")
       ) {
         setNextDeliveryInfo(
-          "Patient's next delivery date is 14th November 2020, in 2 days"
+          <div className="mr-5 text-end">
+            <span className="text-sm">Patient&apos;s next delivery date is </span>
+            <br />
+            <span className="font-bold text-sm">14th November 2020, in 2 days</span>
+          </div>
         );
       } else {
         setNextDeliveryInfo(null);
