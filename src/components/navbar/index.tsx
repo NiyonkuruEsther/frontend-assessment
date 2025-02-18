@@ -143,21 +143,21 @@ export default function MainNav() {
               <span className="text-sm text-gray-600">
                 {nextDeliveryInfo}
               </span>
-              <button className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-md text-sm">
-                Assign Package to Patient
-              </button>
+              <div>
+                <Button
+                  onClick={() => router.push(`/patients/assign-package`)}
+                  variant="filled"
+                >
+                  Assign Package to Patient
+                </Button>
+              </div>
             </div>}
 
           {pathname === "/patients" &&
-            <div className="flex justify-between">
+            <div className="flex w-full items-center justify-between">
               <p>Patients</p>
               <div>
-                <Button
-                  prefixIcon={AddIcon}
-                  onClick={() => router.push(`/patients/add-patient`)}
-                >
-                  Add patient
-                </Button>
+                <Button prefixIcon={AddIcon}>Add patient</Button>
               </div>
             </div>}
         </div>

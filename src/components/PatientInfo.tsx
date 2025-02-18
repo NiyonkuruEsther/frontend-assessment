@@ -1,6 +1,6 @@
 import React from "react";
 
-interface PatientInfoProps {
+export interface PatientInfoProps {
   patientData: {
     hospital_ID: string;
     name: string;

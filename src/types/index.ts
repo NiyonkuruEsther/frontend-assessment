@@ -1,3 +1,5 @@
+import { PatientInfoProps } from "@/components/PatientInfo";
+
 // types/index.ts
 export type Step = {
   id: number;
@@ -21,3 +23,7 @@ export type Rider = {
   deliveries: number;
   type: RiderType;
 };
+
+export interface TableMeta {
+  handleViewPatient: (patient: PatientInfoProps) => void;
+}

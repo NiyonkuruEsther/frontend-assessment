@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-
 import {
   createColumnHelper,
   flexRender,
@@ -13,7 +12,30 @@ import InputField from "../../components/shared/InputField";
 import Select from "../../components/shared/Select";
 import SerachIcon from "../../../public/assets/SearchIcon";
 import MainNav from "@/components/navbar";
-import { useRouter } from "next/navigation";
+import { usePatient } from "@/contexts/PatientContext";
+
+// Make sure this matches your PatientInfo interface from the context
+interface PatientInfo {
+  hospitalId: string;
+  patientName: string;
+  phoneNumber: string;
+  nextDeliveryDate: string;
+  location: string;
+  status: number;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  gender?: string;
+  deliveryAddress?: string;
+}
+
+enum Status {
+  completed,
+  duePaid,
+  dueUnpaid,
+  assigned,
+  paid
+}
 
 function generateBadge(
   status: Status
@@ -34,14 +56,6 @@ function generateBadge(
   }
 }
 
-enum Status {
-  completed,
-  duePaid,
-  dueUnpaid,
-  assigned,
-  paid
-}
-
 const StatusArray = [
   Status.completed,
   Status.duePaid,
@@ -50,35 +64,43 @@ const StatusArray = [
   Status.paid
 ];
 
-type Patients = {
-  hospitalId: string;
-  patientName: string;
-  phoneNumber: string;
-  nextDeliveryDate: string;
-  location: string;
-  status: Status;
+// Create mock data that matches PatientInfo interface
+const defaultData: PatientInfo[] = Array(50).fill(1).map((_, index) => ({
+  hospitalId: "1AFHiiiiiH093",
+  patientName: "Oluwaseun Aregbesola Omotoye",
+  phoneNumber: "+2347068642920",
+  nextDeliveryDate: "12th September 2020",
+  location: "Vl, Lagos",
+  status: StatusArray[index % 5], // Convert enum to number
+  email: "patient@example.com",
+  firstName: "Oluwaseun",
+  lastName: "Omotoye",
+  gender: "Male",
+  deliveryAddress: "Vl, Lagos"
+}));
+
+const columnHelper = createColumnHelper<PatientInfo>();
+
+const ViewCell = ({ patient }: { patient: PatientInfo }) => {
+  const { handleViewPatient } = usePatient();
+  const [badgeVariant, badgeText] = generateBadge(patient.status as Status);
+
+  return (
+    <div className="flex justify-between">
+      <Badge variant={badgeVariant} text={badgeText} className="!w-fit" />
+      <Button
+        onClick={() => handleViewPatient(patient)}
+        variant="outlined"
+        className="!w-fit"
+      >
+        View
+      </Button>
+    </div>
+  );
 };
 
-const defaultData: Patients[] = [
-  ...Array(50).fill(1).map((_, index) => ({
-    hospitalId: "1AFHFH093",
-    patientName: "Oluwaseun Aregbesola Omotoye",
-    phoneNumber: "+2347068642920",
-    nextDeliveryDate: "12th September 2020",
-    location: "Vl, Lagos",
-    status: StatusArray[index % 5]
-  }))
-];
-
-const columnHelper = createColumnHelper<Patients>();
-
 const columns = [
-  // columnHelper.accessor('hospitalId', {
-  //   cell: (info) => info.getValue(),
-  //   footer: (info) => info.column.id,
-  // }),
-  columnHelper.accessor(row => row.hospitalId, {
-    id: "hospitalId",
+  columnHelper.accessor("hospitalId", {
     cell: info =>
       <i>
         {info.getValue()}
@@ -86,7 +108,6 @@ const columns = [
     header: () => <span>Hospital Id</span>
   }),
   columnHelper.accessor("patientName", {
-    id: "patientName",
     cell: info =>
       <i>
         {info.getValue()}
@@ -94,7 +115,6 @@ const columns = [
     header: () => <span>{`Patient's Name`}</span>
   }),
   columnHelper.accessor("phoneNumber", {
-    id: "phoneNumber",
     cell: info =>
       <i>
         {info.getValue()}
@@ -102,7 +122,6 @@ const columns = [
     header: () => <span>Phone Number</span>
   }),
   columnHelper.accessor("nextDeliveryDate", {
-    id: "nextDeliveryDate",
     cell: info =>
       <i>
         {info.getValue()}
@@ -110,38 +129,23 @@ const columns = [
     header: () => <span>Next Delivery Date</span>
   }),
   columnHelper.accessor("location", {
-    id: "location",
     cell: info =>
       <i>
         {info.getValue()}
       </i>,
-    header: () => <span>location</span>
+    header: () => <span>Location</span>
   }),
   columnHelper.accessor("status", {
-    id: "status",
-    cell: function(info) {
-      const [badgeVariant, badgeText] = generateBadge(info.getValue());
-
-      return (
-        <div className="flex justify-between">
-          <Badge variant={badgeVariant} text={badgeText} className="!w-fit" />
-          <Button
-            // onClick={() => router.push("/patients/view-patient")}
-            variant="outlined"
-            className="!w-fit"
-          >
-            View
-          </Button>
-        </div>
-      );
+    cell: info => {
+      const patient = info.row.original;
+      return <ViewCell patient={patient} />;
     },
     header: () => <span>Status</span>
   })
 ];
 
 export default function One() {
-  const [data, _setData] = useState(() => [...defaultData]);
-
+  const [data] = useState(() => [...defaultData]);
   const table = useReactTable({
     data,
     columns,
@@ -151,20 +155,11 @@ export default function One() {
   return (
     <div className="w-full mx-auto">
       <MainNav />
-
-      {/* <div className="w-custom-fit-screen  flex justify-between items-center">
-        <span className=" text-lg">Patients</span>
-        <span>
-          <Button prefixIcon={AddIcon} onClick={() => router.push(`/patients/add-patient`)}>
-            Add patient
-          </Button>
-        </span>
-      </div> */}
       <hr className="my-5" />
 
-      <div className="w-custom-fit-screen flex py-5 items-center justify-between ">
+      <div className="w-custom-fit-screen flex py-5 items-center justify-between">
         <div className="flex gap-5">
-          <span>sort By</span>
+          <span>Sort By</span>
           <span className="font-bold">
             <Select
               options={["Hospital ID", "Patient's Name", "Phone Number"]}
@@ -179,7 +174,7 @@ export default function One() {
         </div>
       </div>
 
-      <div className="w-custom-fit-screen ">
+      <div className="w-custom-fit-screen">
         <table className="w-full md:px-16 text-lg">
           <thead className="border-b">
             {table.getHeaderGroups().map(headerGroup =>
@@ -199,9 +194,9 @@ export default function One() {
           </thead>
           <tbody className="font-light overflow-scroll">
             {table.getRowModel().rows.map(row =>
-              <tr className=" border-b *:py-5" key={row.id}>
+              <tr className="border-b *:py-5" key={row.id}>
                 {row.getVisibleCells().map(cell =>
-                  <td key={cell.id} className="">
+                  <td key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 )}
@@ -210,7 +205,6 @@ export default function One() {
           </tbody>
         </table>
       </div>
-      <div />
     </div>
   );
 }

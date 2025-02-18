@@ -1,8 +1,10 @@
-// app/layout.tsx
-
+"use client";
 import Link from "next/link";
 import MainNav from "../navbar";
 import SideContentMainContentLayout from "./SidebarContentLayout";
+import { usePathname } from "next/navigation";
+import PatientInfo, { PatientInfoProps } from "../PatientInfo";
+import { PatientProvider } from "@/contexts/PatientContext";
 
 function PatientNavigation() {
   const Links = ["Patient", "Rider's Profile", "Delivery History"];
@@ -30,20 +32,31 @@ function PatientNavigation() {
     </div>
   );
 }
+
 export default function MainLayout({
-  children
+  children,
+  patientData
 }: {
   children: React.ReactNode;
+  patientData?: PatientInfoProps;
 }) {
+  // const router = useRouter();
+  const pathname = usePathname();
   return (
     <main className="h-screen w-full overflow-scroll">
-      <header className="bg-white">
-        <MainNav />
-      </header>
-      <div className="flex justify-between">
-        <SideContentMainContentLayout SideComponent={<PatientNavigation />} />
-        {children}
-      </div>
+      <PatientProvider>
+        <header className="bg-white">
+          <MainNav />
+        </header>
+        <div className="flex justify-between">
+          {pathname.includes("assign-package")
+            ? <PatientInfo patientData={patientData} />
+            : <SideContentMainContentLayout
+                SideComponent={<PatientNavigation />}
+              />}
+          {children}
+        </div>
+      </PatientProvider>
     </main>
   );
 }
